@@ -95,7 +95,7 @@ public static class PlayCommand
 
             if (host is not null)
             {
-                host.ShowFinished(record);
+                host.ShowFinished(record, cancellationToken);
             }
             else
             {

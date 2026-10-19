@@ -161,28 +161,45 @@ public sealed class TuiHost : IDisposable
         }
     }
 
-    public void ShowFinished(GameRecord record)
+    /// <summary>
+    /// Leaves the final position on screen until the user explicitly exits. The TUI never closes
+    /// on its own; Enter/Escape/q exit, f flips the board, and Ctrl+C cancels via the token.
+    /// </summary>
+    public void ShowFinished(GameRecord record, CancellationToken cancellationToken = default)
     {
         lock (_gate)
         {
             _status = $"{record.Status.Result}  {record.Status.Termination}";
             _whiteRemaining = null;
             _blackRemaining = null;
-            _prompt = "Press any key to exit";
+            _prompt = "Game over — Enter or q exits, f flips";
         }
 
         Render();
 
-        var deadline = DateTime.UtcNow.AddSeconds(10);
-        while (DateTime.UtcNow < deadline)
+        while (!cancellationToken.IsCancellationRequested && !_disposed)
         {
-            if (_terminal.KeyAvailable)
+            if (!_terminal.KeyAvailable)
             {
-                _terminal.Read();
-                return;
+                Thread.Sleep(50);
+                continue;
             }
 
-            Thread.Sleep(50);
+            switch (_terminal.Read())
+            {
+                case KeyEvent { Key: UiKey.Enter or UiKey.Escape }:
+                case KeyEvent { Character: 'q' or 'Q' }:
+                    return;
+
+                case KeyEvent { Character: 'f' or 'F' }:
+                    lock (_gate)
+                    {
+                        _flipped = !_flipped;
+                    }
+
+                    Render();
+                    break;
+            }
         }
     }
 

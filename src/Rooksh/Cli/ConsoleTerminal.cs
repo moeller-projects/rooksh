@@ -39,7 +39,7 @@ public sealed class ConsoleTerminal : IDisposable
         _entered = true;
         try
         {
-            Console.TreatControlCAsInput = true;
+            // Leave Ctrl+C as a signal so the host can cancel and restore the terminal cleanly.
             Console.CursorVisible = false;
         }
         catch
@@ -60,7 +60,6 @@ public sealed class ConsoleTerminal : IDisposable
         {
             Console.ResetColor();
             Console.CursorVisible = true;
-            Console.TreatControlCAsInput = false;
         }
         catch
         {
