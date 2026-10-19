@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Rooksh.TestSupport</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Rooksh.Chess\Rooksh.Chess.csproj" />
+    <ProjectReference Include="..\..\src\Rooksh.Uci\Rooksh.Uci.csproj" />
+  </ItemGroup>
+
+</Project>

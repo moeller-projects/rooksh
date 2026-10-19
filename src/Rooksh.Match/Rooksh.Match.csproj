@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Rooksh.Match</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rooksh.Chess\Rooksh.Chess.csproj" />
+    <ProjectReference Include="..\Rooksh.Uci\Rooksh.Uci.csproj" />
+  </ItemGroup>
+
+</Project>

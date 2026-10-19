@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Rooksh.Rendering</RootNamespace>
+  </PropertyGroup>
+
+</Project>

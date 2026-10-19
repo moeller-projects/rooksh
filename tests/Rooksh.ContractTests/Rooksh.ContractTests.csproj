@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Rooksh.ContractTests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Rooksh.Chess\Rooksh.Chess.csproj" />
+    <ProjectReference Include="..\..\src\Rooksh.Match\Rooksh.Match.csproj" />
+    <ProjectReference Include="..\..\src\Rooksh.Uci\Rooksh.Uci.csproj" />
+  </ItemGroup>
+
+</Project>
