@@ -16,7 +16,8 @@ public sealed record MovePlayedEvent(
     ChessMove Move,
     int Ply,
     TimeSpan WhiteRemaining,
-    TimeSpan BlackRemaining) : MatchEvent;
+    TimeSpan BlackRemaining,
+    string Fen) : MatchEvent;
 
 public sealed record SideToMoveChangedEvent(ChessSide SideToMove) : MatchEvent;
 

@@ -146,7 +146,8 @@ public sealed class MatchOrchestrator
                     played,
                     record.Moves.Count,
                     _clock.Remaining(ChessSide.White),
-                    _clock.Remaining(ChessSide.Black)));
+                    _clock.Remaining(ChessSide.Black),
+                    _game.Fen));
 
                 if (_game.Status.IsOver)
                 {

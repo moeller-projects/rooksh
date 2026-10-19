@@ -65,6 +65,7 @@ public sealed class TuiHost : IDisposable
 
                 case MovePlayedEvent move:
                     _moves.Add(move.Move.San);
+                    _fen = move.Fen;
                     (_lastFrom, _lastTo) = Squares(move.Move.Uci);
                     _selected = null;
                     _targets = [];

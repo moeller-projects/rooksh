@@ -205,6 +205,29 @@ public class MatchOrchestratorTests
         whiteCommands.ShouldContain("ponderhit");
     }
 
+    [Fact]
+    public async Task Move_events_carry_the_position_after_each_move()
+    {
+        var white = new StubMoveSource("White", _ => MoveChoice.Of("e2e4"));
+        var black = new StubMoveSource("Black", _ => MoveChoice.Of("e7e5"));
+        var game = GeraChessGameFactory.Instance.Create();
+        var events = new List<MatchEvent>();
+
+        var record = await MatchOrchestrator.PlayAsync(
+            game,
+            white,
+            black,
+            new MatchOptions { MaxPlies = 2 },
+            events.Add);
+
+        var moves = events.OfType<MovePlayedEvent>().ToList();
+        moves.Count.ShouldBe(2);
+        moves[0].Fen.ShouldStartWith("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b");
+        moves[1].Fen.ShouldStartWith("rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w");
+        moves[1].Fen.ShouldBe(game.Fen);
+        record.Moves.Count.ShouldBe(2);
+    }
+
     private sealed class StubMoveSource : IMoveSource
     {
         private readonly Func<MoveRequest, MoveChoice> _choose;
