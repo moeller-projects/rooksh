@@ -1,0 +1,41 @@
+# rooksh configuration.
+#
+# Copy to `rooksh.toml` (git-ignored) and adjust. Every key also has an environment variable
+# and a CLI flag that use the same canonical name, e.g.
+#   [match] base_minutes  <->  ROOKSH_BASE_MINUTES  <->  --base-minutes
+# Precedence is: CLI flag > environment variable > TOML > built-in default.
+
+[engine_a]
+path = "engines/zwischenzug"
+args = []
+hash_mb = 64
+threads = 1
+# multipv = 3
+# uci_elo = 1800
+# limit_strength = false
+
+[engine_b]
+path = "engines/stockfish"
+args = []
+hash_mb = 128
+threads = 4
+
+[match]
+# engine_vs_engine | human_vs_engine | human_vs_human | analysis
+mode = "engine_vs_engine"
+# fixed | increment | sudden_death
+time_control = "increment"
+base_minutes = 10
+increment_seconds = 2
+ponder = true
+# which slot the human controls in human_vs_engine: "a" (White) or "b" (Black)
+human_side = "a"
+# Fixed limits; leave unset to search on the clock.
+# depth = 18
+# nodes = 1000000
+
+[ui]
+ascii = false
+show_coordinates = true
+info_refresh_ms = 50
+multipv = 3

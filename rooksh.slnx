@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Rooksh/Rooksh.csproj" />
+    <Project Path="src/Rooksh.Uci/Rooksh.Uci.csproj" />
+    <Project Path="src/Rooksh.Match/Rooksh.Match.csproj" />
+    <Project Path="src/Rooksh.Chess/Rooksh.Chess.csproj" />
+    <Project Path="src/Rooksh.Rendering/Rooksh.Rendering.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Rooksh.TestSupport/Rooksh.TestSupport.csproj" />
+    <Project Path="tests/Rooksh.Uci.Tests/Rooksh.Uci.Tests.csproj" />
+    <Project Path="tests/Rooksh.Match.Tests/Rooksh.Match.Tests.csproj" />
+    <Project Path="tests/Rooksh.Rendering.Tests/Rooksh.Rendering.Tests.csproj" />
+    <Project Path="tests/Rooksh.Tests/Rooksh.Tests.csproj" />
+    <Project Path="tests/Rooksh.ContractTests/Rooksh.ContractTests.csproj" />
+  </Folder>
+</Solution>

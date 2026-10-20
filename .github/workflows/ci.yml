@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore rooksh.slnx
+
+      - name: Build
+        run: dotnet build rooksh.slnx -c Release --no-restore
+
+      - name: Test (unit + mock-engine integration)
+        run: dotnet test rooksh.slnx -c Release --no-build --filter "Category!=Contract"
+
+      - name: Publish single-file (linux-x64)
+        run: dotnet publish src/Rooksh/Rooksh.csproj -c Release -r linux-x64 --self-contained false -o artifacts/linux-x64
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rooksh-linux-x64
+          path: artifacts/linux-x64
